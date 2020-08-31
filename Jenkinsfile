@@ -14,7 +14,7 @@ environment
         }
   stage('Docker Build and Tag') {
            steps {
-             
+                sh 'ls'
                 sh 'docker build -t nginxtest:latest .'             
           }
         }
