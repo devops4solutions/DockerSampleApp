@@ -1,5 +1,9 @@
 pipeline {
     agent any
+environment 
+    {
+    dockerHub = 'dockerhub'
+   }
  stages {
       stage('checkout') {
            steps {
@@ -18,9 +22,9 @@ pipeline {
   stage('Publish image to Docker Hub') {
            steps {
              
-              sh 'docker login'
-              sh 'docker tag nginxtest nikhilnidhi/nginxtest:latest'
-              sh 'docker push nikhilnidhi/nginxtest:v1'         
+               sh 'docker login -u {dockerHub_usr} -p {dockerhub_psw}'
+              sh  'docker tag nginxtest nikhilnidhi/nginxtest:latest'
+              sh  'docker push nikhilnidhi/nginxtest:latest'         
           }
         }
  stage('Run Docker container on remote hosts') {
