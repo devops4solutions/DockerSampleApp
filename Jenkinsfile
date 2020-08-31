@@ -2,7 +2,7 @@ pipeline {
     agent any
 environment 
     {
-    dockerHub = 'dockerhub'
+    dockerHub =credentials('dockerhub')
    }
  stages {
   stage('Docker Build and Tag') {
