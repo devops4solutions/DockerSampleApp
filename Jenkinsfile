@@ -2,7 +2,7 @@ pipeline {
     agent any
 environment 
     {
-    dockerHub =credentials('dockerhub')
+    dockerhubcredential = credentials('dockerHub')
    }
  stages {
   stage('Docker Build and Tag') {
@@ -15,7 +15,7 @@ environment
   stage('Publish image to Docker Hub') {
            steps {
              
-               sh 'docker login -u {dockerHub_usr} -p {dockerhub_psw}'
+               sh 'docker login -u {dockerhubcredential_usr} -p {dockerhubcredential_psw}'
               sh  'docker tag nginxtest nikhilnidhi/nginxtest:latest'
               sh  'docker push nikhilnidhi/nginxtest:latest'         
           }
