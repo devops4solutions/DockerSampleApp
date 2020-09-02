@@ -9,20 +9,19 @@ environment
  stages {
   stage('Docker Build and Tag') {
            steps {
-              script {
-                    docker.build registry + ":$BUILD_NUMBER"
-                    }
-                //sh 'docker build -t nginxtest:latest .'             
+              
+                sh 'docker build -t nginxtest:latest .'             
           }
         }
      
   stage('Publish image to Docker Hub') {
-           steps {
-            script {
-      docker.withRegistry( '', dockerhubcredential ) {
-        dockerImage.push()
-      }
-            }
+          
+            steps {
+        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+           sh  'docker tag nginxtest nikhilnidhi/nginxtest:latest'
+             sh  'docker push nikhilnidhi/nginxtest:latest'         
+        }
+            
                //sh 'docker login -u ${dockerhubcredential_usr} -p ${dockerhubcredential_psw} nikhilnidhi/nginxtest'
               //sh  'docker tag nginxtest nikhilnidhi/nginxtest:latest'
               //sh  'docker push nikhilnidhi/nginxtest:latest'         
