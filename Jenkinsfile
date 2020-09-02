@@ -6,7 +6,7 @@ environment
    }
     tools
     {
-       maven "docker"
+       docker "docker"
     }
  stages {
   stage('Docker Build and Tag') {
