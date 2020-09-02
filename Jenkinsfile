@@ -4,10 +4,7 @@ environment
     {
     dockerhubcredential = credentials('dockerHub')
    }
-    tools
-    {
-       docker "docker"
-    }
+
  stages {
   stage('Docker Build and Tag') {
            steps {
