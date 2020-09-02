@@ -22,6 +22,7 @@ environment
       docker.withRegistry( '', dockerhubcredential ) {
         dockerImage.push()
       }
+            }
                //sh 'docker login -u ${dockerhubcredential_usr} -p ${dockerhubcredential_psw} nikhilnidhi/nginxtest'
               //sh  'docker tag nginxtest nikhilnidhi/nginxtest:latest'
               //sh  'docker push nikhilnidhi/nginxtest:latest'         
