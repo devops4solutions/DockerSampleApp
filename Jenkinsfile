@@ -1,16 +1,13 @@
 pipeline {
     agent any
-environment 
-    {
-    dockerhubcredential = credentials('dockerHub')
-    registry = "nikhilnidhi/nginxtest"
-   }
-
  stages {
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t nginxtest:latest .'             
+                sh 'docker build -t nginxtest:latest .' 
+                sh 'docker tag nginxtest nikhilnidhi/nginxtest:latest'
+                sh 'docker tag nginxtest nikhilnidhi/nginxtest:$BUILD_NUMBER'
+               
           }
         }
      
@@ -18,13 +15,10 @@ environment
           
             steps {
         withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-           sh  'docker tag nginxtest nikhilnidhi/nginxtest:latest'
-             sh  'docker push nikhilnidhi/nginxtest:latest'         
+          sh  'docker push nikhilnidhi/nginxtest:latest'
+          sh  'docker push nikhilnidhi/nginxtest:$BUILD_NUMBER' 
         }
-            
-               //sh 'docker login -u ${dockerhubcredential_usr} -p ${dockerhubcredential_psw} nikhilnidhi/nginxtest'
-              //sh  'docker tag nginxtest nikhilnidhi/nginxtest:latest'
-              //sh  'docker push nikhilnidhi/nginxtest:latest'         
+                  
           }
         }
  stage('Run Docker container on remote hosts') {
