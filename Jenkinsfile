@@ -21,6 +21,14 @@ pipeline {
                   
           }
         }
+     
+      stage('Run Docker container on Jenkins Ageny') {
+             
+            steps {
+                sh "docker run -d -p 4001:80 nginxtest"
+ 
+            }
+        }
  stage('Run Docker container on remote hosts') {
              
             steps {
