@@ -22,7 +22,7 @@ pipeline {
           }
         }
      
-      stage('Run Docker container on Jenkins Ageny') {
+      stage('Run Docker container on Jenkins Agent') {
              
             steps {
                 sh "docker run -d -p 4001:80 nginxtest"
